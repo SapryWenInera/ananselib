@@ -1,0 +1,52 @@
+[package]
+name = "libananse"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dev-dependencies]
+zip = "2.1.6"
+criterion = { version = "0.5.1", features = ["async_smol", "smol"] }
+rand = "0.8.5"
+smol.workspace = true
+async_zip = { version = "0.0.17", features = ["async-compression", "deflate"] }
+
+[dependencies]
+libzip_rs = { path = "zip", optional = true }
+fastsearch.workspace = true
+features = "0.10.0"
+
+[features]
+default = ["zip"]
+zip = ["dep:libzip_rs"]
+
+[workspace]
+members = [ 
+	"search",
+	"zip"
+]
+
+[workspace.dependencies]
+async-compression = { version = "0.4.12", default-features = false, features = ["futures-io", "deflate", "deflate64", "lzma", "bzip2", "zstd", "xz"] } 
+fastsearch = { path = "search" }
+indexmap = "2.3.0"
+smol = "2.0.1"
+async-fn-stream = "0.2.2"
+rayon = "1.10.0"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[[bench]]
+name = "fastsearch"
+harness = false
+
+[[bench]]
+name = "read_zip"
+harness = false
+
+[[bench]]
+name = "zip_extract"
+harness = false

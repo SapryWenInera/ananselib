@@ -1,0 +1,10 @@
+# Dirs
+debug/
+target/
+
+# Files
+zip/tests/*
+.VSCodeCounter
+Cargo.lock
+**/*.rs.bk
+*.pdb
